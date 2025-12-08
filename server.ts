@@ -10,7 +10,10 @@ import Post from "./src/models/post.model";
 async function startSocketServer() {
   await dbConnect();
 
-  const httpServer = http.createServer();
+  const httpServer = http.createServer((req, res) => {
+    res.writeHead(200, { "Content-Type": "text/plain" });
+    res.end("Socket server is running 🚀");
+  });
 
   const io = new Server(httpServer, {
     cors: {
